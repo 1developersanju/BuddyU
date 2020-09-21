@@ -1,103 +1,120 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_tindercard/flutter_tindercard.dart';
-import 'package:curved_navigation_bar/curved_navigation_bar.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'DoubleOptIn.dart';
+import 'Home.dart';
 
-void main() => runApp(MyApp());
+    void main() {
+      runApp(MaterialApp(
+        title: 'Flutter',
+        
+        home: LoginScreen(),
+      ));
+    }
 
-class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
+ class LoginScreen extends StatefulWidget {
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Flutter Demo',
-      home: ExampleHomePage(),
-    );
+  State<StatefulWidget> createState() {
+    LoginScreenState myAppState() => new LoginScreenState();
+    return myAppState();
   }
 }
 
-class ExampleHomePage extends StatefulWidget {
-  @override
-  _ExampleHomePageState createState() => _ExampleHomePageState();
-}
-
-class _ExampleHomePageState extends State<ExampleHomePage>
-    with TickerProviderStateMixin {
-  List<String> welcomeImages = [
-    "images/Person1.png",
-    "images/Person1.png",
-    "images/Person1.png",
-    "images/person1.png",
-    "images/person1.png",
-    "images/Person1.png",
-    
-  ];
-
-
+class LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
-    CardController controller; //Use this to trigger swap.
-
-    return Scaffold(
-        backgroundColor: Colors.white,
-        appBar: AppBar(
-          centerTitle: true,
-          backgroundColor: Colors.white,
-          title: Text('BuddieU',style: TextStyle(color: Colors.redAccent),),
-        ),
-        body:  Container(
-            height: MediaQuery.of(context).size.height * 0.7,
-            child:TinderSwapCard(
-                 orientation: AmassOrientation.TOP,
-                 totalNum: 6,
-              stackNum: 5,
-              swipeEdge: 4.0,
-              maxWidth: MediaQuery.of(context).size.width * 0.9,
-              maxHeight: MediaQuery.of(context).size.width * 0.9,
-              minWidth: MediaQuery.of(context).size.width * 0.8,
-              minHeight: MediaQuery.of(context).size.width * 0.8,
-              cardBuilder: (context, index) => Card(
-                child: Image.asset('${welcomeImages[index]}'),
-              ) ,
-              cardController: controller = CardController(),
-              swipeUpdateCallback:
-                  (DragUpdateDetails details, Alignment align){
-                   if(align.x < 0){
-                    print("nope");
-
-                   }else if (align.x > 0){
-                    print("like");
-                   }
-              },
-              swipeCompleteCallback:
-              (CardSwipeOrientation orientaion , int index){
-
-              },
-            )),
-        bottomNavigationBar: CurvedNavigationBar(
-          color: Colors.white,
-          backgroundColor: Colors.transparent,
-          buttonBackgroundColor: Colors.white,
-          height: 70.0,
-          items: <Widget>[
-            Icon(
-              Icons.home,
-              size: 30,
-              color: Colors.grey[400],
+    return new MaterialApp(home: new Scaffold(body: new Builder(
+      builder: (BuildContext context) {
+        return new Stack(
+          children: <Widget>[
+            new Image.asset(
+              'images/BG2.png',
+              fit: BoxFit.cover,
             ),
-            
-           Image.asset("images/BuddieU_logo_transparent.png",
-            height:50.0,
-            ),   
-            Icon(
-              Icons.settings,
-              size: 30.0,
-              color: Colors.grey[400],
+            new Center(
+              child: new Container(
+               
+                child: new Card(
+                  color: Colors.white,
+                  elevation: 6.0,
+                  margin: EdgeInsets.only(right: 3.0, left: 5.0),
+                  child: new Wrap(
+                    children: <Widget>[
+                   new ListTile(
+                        
+                      ),
+                      Center(
+                        child: new Container(
+                          alignment: new FractionalOffset(0.01, 1.0),
+                          child: new Text(
+                            'Login with your email id',
+                            style: TextStyle(
+                                fontSize: 20.0,),
+                          ),
+                        ),
+                      ),
+                     //   new ListTile(
+                        
+                      //),
+                      new ListTile(
+                        leading: const Icon(Icons.person),
+                        title: new TextFormField(
+                          decoration: new InputDecoration(
+                            hintText: 'email id',
+                           // labelText: 'Enter Your Email address',
+                          ),
+                          keyboardType: TextInputType.emailAddress,
+                        ),
+                      ),
+                      new ListTile(
+                        
+                      ),
+                      
+
+                                            
+                      Center(
+
+                   child: Container(
+              margin: EdgeInsets.all(20),
+              width: 150,
+              height: 50,
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  colors: [Colors.pink, Colors.orange[300]],
+                  begin: FractionalOffset.topLeft,
+                  end: FractionalOffset.bottomRight,
+                ),
+              ),
+              child: FlatButton(
+                child: Text(
+                  'Next',
+                  style: TextStyle(color: Colors.white),
+                ),
+                onPressed: () {
+                  Navigator.pushReplacement(context, MaterialPageRoute(
+                    builder: (context) => HomePage()));
+                  },
+              ),
             ),
+                        ),
+                      
+                    ],
+                  ),
+                ),
+              ),
+            ),
+           
           ],
-        ),
-      );
+        );
+      },
+    )));
   }
 }
+
+
+
+
+
+
+
+
+
+
